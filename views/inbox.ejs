@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SMS Inbox</title>
+  <style>
+    body { font-family: sans-serif; padding: 30px; background: #fafaff; }
+    h1 { color: #3171e0; }
+    .msg { border:1px solid #ddd; margin:10px 0; padding:10px; border-radius:6px; }
+    .from { color:#888; }
+    form { margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>SMS Inbox</h1>
+  <form method="POST" action="/send">
+    <label>To: <input name="to" required></label>
+    <label>Message: <input name="body" required style="width:300px"></label>
+    <button type="submit">Send SMS</button>
+  </form>
+  <h2>Recent Messages</h2>
+  <% for (let msg of messages) { %>
+    <div class="msg">
+      <div><b>From:</b> <span class="from"><%= msg.from || msg.to %></span></div>
+      <div><b>Message:</b> <%= msg.body %></div>
+      <div><small><%= new Date(msg.date).toLocaleString() %></small></div>
+    </div>
+  <% } %>
+</body>
+</html>
